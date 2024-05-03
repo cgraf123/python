@@ -43,7 +43,7 @@ def api_uuid_post(uuid):
 def api_uuid_delete(uuid):
     """Delete GeoJSON UUID."""
     geo_manager.remove(uuid)
-    return ""
+    return str(uuid)
 
 
 @app.get("/ui/<uuid:uuid>")

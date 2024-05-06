@@ -1,4 +1,5 @@
 import logging
+import os.path
 
 from flask import Flask, request
 import folium
@@ -8,7 +9,8 @@ from .geo import GeoJsonStorageManager
 logging.basicConfig()
 app = Flask(__name__)
 app.logger.setLevel(logging.DEBUG)
-geo_manager = GeoJsonStorageManager(storage_path="tmp/storage", logger=app.logger)
+path = os.path.dirname(__file__)
+geo_manager = GeoJsonStorageManager(storage_path=os.path.join(path, "tmp/storage"), logger=app.logger)
 
 
 @app.get("/api/")

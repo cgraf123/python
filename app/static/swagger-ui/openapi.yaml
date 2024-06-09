@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: GeoJSON Flask API
+  description: |-
+    Documenation for GeoJSON Flask API
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:5000
+tags:
+  - name: geojson
+    description: API endpoints to manage GeoJSON
+paths:
+  /api:
+    get:
+      tags:
+        - geojson
+      summary: Get GeoJson UUIDs
+      description: Retreives a list of GeoJSON UUIDs
+      operationId: getUuids
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Uuids'
+    post:
+      tags:
+        - geojson
+      summary: Add new GeoJSON
+      description: Adds a new GeoJSON
+      operationId: addUuid
+      requestBody:
+        description: Upload GeoJSON
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                geojson:
+                  type: string
+                  format: binary
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+        '400':
+          description: Invalid input
+  /api/{uuid}:
+    get:
+      tags:
+        - geojson
+      summary: Get GeoJson by UUID
+      description: Retreive GeoJSON for UUID
+      operationId: getUuid
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Uuids'
+
+    post:
+      tags:
+        - geojson
+      summary: Add GeoJSON with specified UUID
+      description: Add or overwrite a GeoJSON with specified UUID
+      operationId: updateUuid
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+        '400':
+          description: Invalid input
+    delete:
+      tags:
+        - geojson
+      summary: Remove GeoJSON UUID
+      description: Removes GeoJSON for given UUID
+      operationId: deleteUuid
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+        '400':
+          description: Invalid input
+      
+components:
+  schemas:
+    Uuids:
+      type: array
+      items:
+        type: string
+        format: uuid

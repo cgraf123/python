@@ -53,10 +53,9 @@ Requests CLI client used to interact with API endpoints.
    INFO:__main__:response content: b'840735ec-aa0f-4b86-b516-771792b955dd'
    ```
 3. From web browser client, view the uploaded GeoJSON resource by navigating to `http://127.0.0.1:5000/ui/<UUID>`
-   ![web browser screenshot](static/screenshot-geojson-1.png "screenshot")
+   ![web browser screenshot](data/screenshot-geojson-1.png "screenshot")
 
 ## TODO
  * unit testing
  * database integration
- * add UI API documentation and endpoint testing (OpenAPI/Swagger)
  * add UI endpoints for GeoJSON management via API
